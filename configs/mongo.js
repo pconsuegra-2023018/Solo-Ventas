@@ -9,13 +9,13 @@ export const connect = async()=>{
         console.log('MongoDB | try connection')
     })
     mongoose.connection.on('connected', ()=>{
-        console.log('MongoDB | connected to mongodb')
+        console.log('MongoDB | connected to mongodb 🌱')
     })
     mongoose.connection.on('open', ()=>{
-        console.log('MongoDB | connected to database')
+        console.log('MongoDB | connected to database 🗃️')
     })
     mongoose.connection.on('reconnected', ()=>{
-        console.log('MongoDB | reconnected to mongodb')
+        console.log('MongoDB | reconnected to mongodb 🍃')
     })
     mongoose.connection.on('disconnected', ()=>{
         console.log('MongoDB | disconnected')

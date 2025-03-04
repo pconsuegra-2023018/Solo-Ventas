@@ -1,31 +1,38 @@
 import { Schema, model } from "mongoose";
 
-const productoSchema = Schema(
+const productSchema = Schema(
      {
-    nombre: { 
+    name: { 
         type: String, 
-        required: true 
+        required: [true, 'Name is required'],
+        maxLength: [35, `Can't be overcome 35 characters`]
     },
-    descripcion: { 
-        type: String 
+    description: { 
+        type: String,
+        required: [true, 'Description is required'],
+        maxLength: [50, `Can't be overcome 50 characters`]
     },
-    categoria: { 
+    category: { 
         type: Schema.Types.ObjectId,
-        ref: 'Categoria' 
+        ref: 'Category',
+        default: 'Uncategored'
     },
-    precio: { 
+    price: { 
         type: Number, 
         required: true 
     },
-    cantidadEnStock: { 
+    stock: { 
         type: Number, 
         required: true 
+    },
+    sold:{
+        type: Number
     }
   },
   {
     versionKey: false, 
     timestamps: true 
   }
-);
+)
 
-export default model('Producto', productoSchema) 
+export default model('Product', productSchema) 

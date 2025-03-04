@@ -1,10 +1,10 @@
 'use strict'
-import Categoria from '../categories/category.model.js'
+import Category from '../categories/category.model.js'
 
 export const saveCategory= async(req, res)=>{
     try {
             let data = req.body
-            let category = new Categoria(data)
+            let category = new Category(data)
             await category.save()
             return res.send(
                 {
@@ -16,7 +16,7 @@ export const saveCategory= async(req, res)=>{
             console.error(error)
                 return res.status(500).send(
                     {
-                        message: 'General error with registering product', error
+                        message: 'General error with registering category', error
                     }
                 )
         }
@@ -24,7 +24,7 @@ export const saveCategory= async(req, res)=>{
 
 export const getAll = async(req, res)=>{
     try {
-        let category = await Categoria.find()
+        let category = await Category.find()
         if(!category)return res.status(404).send(
             {
                 success: false,
@@ -35,7 +35,8 @@ export const getAll = async(req, res)=>{
             return res.send(
                 {   
                     success: true,
-                    message: 'Categories found', product: category
+                    message: 'Categories found', 
+                    category: category
 
                 }
             )
@@ -43,7 +44,7 @@ export const getAll = async(req, res)=>{
         console.error(error)
             return res.status(500).send(
                 {
-                    message: 'General error with registering product', error
+                    message: 'General error with category', error
                 }
             )
     }
@@ -52,7 +53,7 @@ export const getAll = async(req, res)=>{
 export const getCategory = async(req, res)=>{
     try {
         let {id} = req.params
-        let category = await Categoria.findById(id)
+        let category = await Category.findById(id)
         if(!category)return res.status(404).send(
             {
                 success: false,
@@ -63,7 +64,8 @@ export const getCategory = async(req, res)=>{
             return res.send(
                 {   
                     success: true,
-                    message: 'Category found', category: category
+                    message: 'Category found', 
+                    category: category
 
                 }
             )
@@ -82,7 +84,7 @@ export const updateCategory = async(req,res)=>{
     try {
         let {id} = req.params
         let data = req.body
-        let category = await Categoria.findByIdAndUpdate(id,data,{new:true})
+        let category = await Category.findByIdAndUpdate(id,data,{new:true})
         if(!category)return res.status(404).send(
             {
                 success: false,
@@ -111,7 +113,7 @@ export const updateCategory = async(req,res)=>{
 export const deleteCategory = async(req, res)=>{
     try {
         let {id} = req.params
-        let category = await Categoria.findByIdAndDelete(id)
+        let category = await Category.findByIdAndDelete(id)
         if(!category)return res.status(404).send(
             {
                 success: false,
